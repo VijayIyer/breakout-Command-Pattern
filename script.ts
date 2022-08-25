@@ -1,5 +1,6 @@
-
-function createBox(brickNumber, top, left, width, height, color)
+/*
+function createBox(brickNumber : number, top : number, left : number,
+     width:number, height:number, color:string) : void
 {
   // console.log(top);
    let board = document.getElementById('board');
@@ -15,20 +16,20 @@ function createBox(brickNumber, top, left, width, height, color)
    board.appendChild(box);
     
 }
-function createPaddle()
+function createPaddle() :void
 {
    
    let board = document.getElementById('board');
-   paddle = document.createElement('div');
+   let paddle = document.createElement('div');
    paddle.setAttribute("id", "paddle");
    paddle.classList.add("paddle");
    board.appendChild(paddle); 
 
 }
-function createBall()
+function createBall() : void
 {
   let board = document.getElementById('board');
-   ball = document.createElement('div');
+   let ball = document.createElement('div');
    ball.setAttribute("id", "ball");
    ball.classList.add("ball");
    ball.setAttribute('up-down', 'down');
@@ -102,19 +103,20 @@ let numBricks = 0;
   createBase();
 }
 
-function movePaddle()
+function movePaddle(e:KeyboardEvent)
 {
     let box = document.getElementById('paddle');
     box.style.position=  'absolute';
-    pos = box.getBoundingClientRect();
+    let pos = box.getBoundingClientRect();
     //console.log(pos); 
-	if(event.keyCode == 37 && (pos.x > 0)) {
+	console.log(e.key);
+    if(e.key === "left" && (pos.x > 0)) {
 
 	box.style.left = (pos.x - sensitivity)+'px';
 	   
 	}
 
-    else if(event.keyCode == 39  && (pos.x < 400)) {
+    else if(e.key === "right"  && (pos.x < 400)) {
      
      box.style.left = (pos.x + sensitivity)+'px';
     }
@@ -134,7 +136,7 @@ function ballMovement()
 	// changing direction logic
 	// collision with bricks
 	
-	for(i = 0; i < bricks.length; i++)
+	for(let i = 0; i < bricks.length; i++)
 	{
 		
 	   let brick_pos = bricks[i].getBoundingClientRect();
@@ -207,11 +209,7 @@ var numHits = 0;
 var intervalId;
 var sensitivity = 10;
 window.addEventListener('load', init);
-window.addEventListener('keydown', movePaddle);
-
-
+window.addEventListener('keydown',movePaddle);
 startInterval(speed);
 
-
-
-
+*/
