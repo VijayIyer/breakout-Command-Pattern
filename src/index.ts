@@ -188,20 +188,7 @@ document.getElementById("undo").addEventListener('click', ()=>{
     
  
 });
-document.getElementById("redo").addEventListener('click', ()=>{
-    
-    //paddle.draw();
-    // let tempBall: Ball = Object.create(ball);
-    // let tempBricks: Array<Brick> = Object.create(bricks);
-    // let tempPaddle: Paddle = Object.create(paddle);
-    // let tempClock: Clock = Object.create(clock);
-    if(replayCommands.commands.length > 0){
-        gameCanvas.getContext('2d').clearRect(0, 0, gameCanvas.width, gameCanvas.height);
-        replayCommands.commands.pop().undo();
-    }
-    
- 
-});
+
 document.getElementById("replay").addEventListener('click', ()=>{
     // console.log('commands:');
     // console.log(commands);
