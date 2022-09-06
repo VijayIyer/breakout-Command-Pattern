@@ -72,14 +72,19 @@ export class MoveBallCommand implements Command{
 export class CommandList implements Command{
     constructor(private canvas:HTMLCanvasElement){
         this.commands = [];
-        this.speed = 80;
+        this.speed = 500;
     }
     
     commands : Array<Command>;
     speed : number;
-    // replays the uploaded commands
+    // replays the stored commands
     execute(): void {
-        setInterval(()=>this.commands.forEach(command=>command.execute()), this.speed);
+        this.canvas.getContext('2d').clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.commands.forEach(function(cmd, index) {
+            setTimeout(()=>cmd.execute()
+              // do whatever
+            , 100 * (index + 1));
+        });
     }
     undo(): void {
         this.commands.forEach(cmd=>cmd.undo());
@@ -111,29 +116,20 @@ export class MovePaddle{
 }
 export class BlowBrickCommand{
     
-    private savedBricks : Array<Brick>;
+  
     private blownBrick:Brick;
-    constructor(private bricks:Array<Brick>, private readonly brickBlownIndex:number){
+    constructor(private readonly oldBricks:Array<Brick>, private readonly newBricks:Array<Brick>){
         
-        
+  
     }
-    // setNewBricks(bricks:Array<Brick>):void{
-    //     this.newBricks = [];
-    //     bricks.forEach(brick => this.newBricks.push(brick));
-    //     console.log("num Bricks inside:");
-    //     console.log(this.oldBricks.length);
-    //     console.log(this.newBricks.length);
-    // }
-    execute():void{
-        this.savedBricks = [...this.bricks];
-        if(this.brickBlownIndex != -1){
-            this.bricks.splice(this.brickBlownIndex, 1);
-        }
-        this.bricks.forEach(brick => brick.draw());
+   execute():void{
+       
+        this.oldBricks.forEach(brick => brick.draw());
+        
     }
     undo():void{
         
-        this.savedBricks.forEach(brick => brick.draw());
+        this.newBricks.forEach(brick => brick.draw());
     }
 
     
